@@ -1,0 +1,19 @@
+local player = game:GetService("Players").LocalPlayer
+local isFarming = false
+
+local function farm(target)
+    isFarming = true
+    task.spawn(function()
+        while isFarming and target and target:FindFirstChild("Head") and player.Character do
+            player.Character:SetPrimaryPartCFrame(target.Head.CFrame * CFrame.new(0, 3, 0))
+            
+            local tool = player.Character:FindFirstChildOfClass("Tool")
+            if tool then tool:Activate() end
+            
+            task.wait(0.1)
+        end
+        isFarming = false
+    end)
+end
+
+-- สั่งหยุด: isFarming = false
